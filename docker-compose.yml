@@ -1,0 +1,40 @@
+services:
+  petclinic:
+    build: .
+    image: monitoring:v1
+    container_name: petclinic
+    networks:
+      - monitoring
+    ports:
+      - 8080:8080
+      - 12345:12345
+    pull_policy: never
+  
+  prometheus:
+    image: prom/prometheus:v2.53.4
+    container_name: prometheus
+    networks:
+      - monitoring
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on: 
+      - petclinic
+
+  grafana:
+    image: grafana/grafana:11.6.0
+    networks:
+      - monitoring
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+networks:
+  monitoring:
+
+volumes:
+  grafana_data:
