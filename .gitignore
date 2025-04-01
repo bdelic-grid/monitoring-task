@@ -1,0 +1,5 @@
+log
+grafana_data/
+Bruno/
+API requests/venv
+API requests/.env
