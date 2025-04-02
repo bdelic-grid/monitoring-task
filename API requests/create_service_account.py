@@ -51,7 +51,7 @@ if __name__ == "__main__":
     seconds_to_live = int(input("Enter how long will the token last in seconds (0 for forever): "))
 
     if account_type not in ["admin", "editor", "viewer"]:
-        print("Account type can be either Viewer or Admin!")
+        print("Account type can be either Viewer, Editor or Admin!")
         sys.exit(1)
 
     load_dotenv()
@@ -60,8 +60,8 @@ if __name__ == "__main__":
 
     account_id = create_account(account_name, account_type, username, password)
 
-    account_token = create_access_token(account_id, token_name, seconds_to_live, username, password)
+    access_token = create_access_token(account_id, token_name, seconds_to_live, username, password)
 
-    print(f"For account {account_name}, with ID {account_id} access token is: {account_token}")
+    print(f"For account {account_name}, with ID {account_id} access token is: {access_token}")
 
 
